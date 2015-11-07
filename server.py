@@ -13,12 +13,31 @@ def index():
 
 @app.route('/process_money', methods=['POST'])
 def money():
+<<<<<<< HEAD
 	if request.form['building'] == 'farm':
 		session['gold'] = random.randrange(10,21)
 	elif request.form['building'] == 'cave':
 		session['gold'] = random.randrange(5,11)
 	elif request.form['building'] == 'house':
 		session['gold'] = random.randrange(2,6)
+=======
+	session['message'] = []
+	if request.form['building'] == 'farm':
+		session['gold'] = random.randrange(10,21)
+		loot = 'Found ' + session['gold'] + ' gold from farm!'
+		session['message'].append(str(loot))
+		session['foundgold'] += session['gold']
+	elif request.form['building'] == 'cave':
+		session['gold'] = random.randrange(5,11)
+		loot = 'Found ' + str(session['gold']) + ' gold from cave!'
+		session['message'].append(loot)
+		session['foundgold'] += session['gold']
+	elif request.form['building'] == 'house':
+		session['gold'] = random.randrange(2,6)
+		loot = 'Found ' + str(session['gold']) + ' gold from house!'
+		session['message'].append(loot)
+		session['foundgold'] += session['gold']
+>>>>>>> append
 	elif request.form['building'] == 'HIGHROLLERYO':
 		luck = random.randrange(1,100)
 		session['gamble'] = random.randrange(0,51)
@@ -27,6 +46,7 @@ def money():
 	if request.form['building'] == 'HIGHROLLERYO':
 		if luck < 50:
 			session['foundgold'] -= session['gamble'] # IF LOST
+<<<<<<< HEAD
 			session['message'] = 'Lost gold!'
 			
 		if luck >= 50:
@@ -35,6 +55,18 @@ def money():
 	else:		
 		session['foundgold'] += session['gold']
 		session['message'] = 'Found gold!'
+=======
+			loot = 'Found ' + str(session['gold']) + ' gold from casino!'
+			session['message'].append(loot)
+			session['foundgold'] += session['gold']
+
+		if luck >= 50:
+			session['foundgold'] += session['gamble'] # IF GAINED
+			loot = 'Lost ' + str(session['gold']) + ' gold from casino!'
+			session['message'].append(loot)
+			session['foundgold'] -= session['gold']
+	# elif:
+>>>>>>> append
 
 	return redirect('/')
 
