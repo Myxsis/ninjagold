@@ -72,7 +72,7 @@ body{
 }
 
 #log{
-	/*text-align: center;*/
+	text-align: left;
 	height: 150px;
 	overflow-y: scroll;
 	border: 1px solid black;

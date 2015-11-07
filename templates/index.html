@@ -59,15 +59,14 @@
 	<div id='activities'>
 		<h4>Activities:</h4>
 		<div id='log'>
-			{% if session['message'] == 'Lost gold!' %}
-				<!-- <p>{{ session['message'] }} -{{ session['gold'] }}</p> -->
-			{% endif %}
-			{% if session['message'] == 'Found gold from farm!'  %}
-				{% for i in session['farm_arr'] %}
+			<!-- {% if session['message']  %}
+				{% for i in session['message'] %}
 					<p>{{ i }}</p>
 				{% endfor %}
-				<!-- <p>{{ session['message'] }} +{{ session['gold'] }}</p> -->
-			{% endif %}
+				<p>{{ session['message'] }} +{{ session['gold'] }}</p>
+			{% endif %} -->
+
+			{{ session['message'] }}
 		</div>
 	</div>
 </body>

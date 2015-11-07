@@ -13,21 +13,22 @@ def index():
 
 @app.route('/process_money', methods=['POST'])
 def money():
-	session['farm_arr'] = []
-	session['cave_arr'] = []
-	session['house_arr'] = []
-	session['casino_arr'] =[]
+	session['message'] = []
 	if request.form['building'] == 'farm':
 		session['gold'] = random.randrange(10,21)
-		session['found'] = 'Found ' + str(session['gold']) + ' gold from farm!'
-		session['farm_arr'].append(session['found'])
+		loot = 'Found ' + session['gold'] + ' gold from farm!'
+		session['message'].append(str(loot))
 		session['foundgold'] += session['gold']
-		session['message'] = 'Found gold from farm!'
 	elif request.form['building'] == 'cave':
 		session['gold'] = random.randrange(5,11)
-		session['cave_arr'].append(session['gold'])
+		loot = 'Found ' + str(session['gold']) + ' gold from cave!'
+		session['message'].append(loot)
+		session['foundgold'] += session['gold']
 	elif request.form['building'] == 'house':
 		session['gold'] = random.randrange(2,6)
+		loot = 'Found ' + str(session['gold']) + ' gold from house!'
+		session['message'].append(loot)
+		session['foundgold'] += session['gold']
 	elif request.form['building'] == 'HIGHROLLERYO':
 		luck = random.randrange(1,100)
 		session['gamble'] = random.randrange(0,51)
@@ -36,11 +37,15 @@ def money():
 	if request.form['building'] == 'HIGHROLLERYO':
 		if luck < 50:
 			session['foundgold'] -= session['gamble'] # IF LOST
-			session['message'] = 'Lost gold from casino!'
+			loot = 'Found ' + str(session['gold']) + ' gold from casino!'
+			session['message'].append(loot)
+			session['foundgold'] += session['gold']
 
 		if luck >= 50:
 			session['foundgold'] += session['gamble'] # IF GAINED
-			session['message'] = 'Found gold from casino!'
+			loot = 'Lost ' + str(session['gold']) + ' gold from casino!'
+			session['message'].append(loot)
+			session['foundgold'] -= session['gold']
 	# elif:
 
 	return redirect('/')
