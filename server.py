@@ -18,17 +18,17 @@ def money():
 	if request.form['building'] == 'farm':
 		session['gold'] = random.randrange(10,21)
 		loot = 'Found ' + str(session['gold']) + ' gold from farm!'
-		session['message'].append(str(loot))
+		session['message'].insert(0, loot)
 		session['foundgold'] += session['gold']
 	elif request.form['building'] == 'cave':
 		session['gold'] = random.randrange(5,11)
 		loot = 'Found ' + str(session['gold']) + ' gold from cave!'
-		session['message'].append(loot)
+		session['message'].insert(0, loot)
 		session['foundgold'] += session['gold']
 	elif request.form['building'] == 'house':
 		session['gold'] = random.randrange(2,6)
 		loot = 'Found ' + str(session['gold']) + ' gold from house!'
-		session['message'].append(loot)
+		session['message'].insert(0, loot)
 		session['foundgold'] += session['gold']
 	elif request.form['building'] == 'HIGHROLLERYO':
 		luck = random.randrange(1,100)
@@ -39,13 +39,13 @@ def money():
 		if luck < 50:
 			session['foundgold'] -= session['gamble'] # IF LOST
 			loot = 'Found ' + str(session['gold']) + ' gold from casino!'
-			session['message'].append(loot)
+			session['message'].insert(0, loot)
 			session['foundgold'] += session['gold']
 
 		if luck >= 50:
 			session['foundgold'] += session['gamble'] # IF GAINED
 			loot = 'Lost ' + str(session['gold']) + ' gold from casino!'
-			session['message'].append(loot)
+			session['message'].insert(0, loot)
 			session['foundgold'] -= session['gold']
 	# elif:
 
